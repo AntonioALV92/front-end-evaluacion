@@ -1,12 +1,7 @@
 <script setup>
 import { ref } from 'vue'
 import api from '../services/api'
-import { getUser, logout } from '../services/auth'
-import { useRouter } from 'vue-router'
-
-const router = useRouter()
-
-const user = getUser()
+import AppHeader from '../components/AppHeader.vue'
 
 const financialReference = ref('')
 const cardNumber = ref('')
@@ -58,29 +53,11 @@ async function getTransactions() {
         loading.value = false
     }
 }
-
-function signOut() {
-    logout()
-    router.push('/login')
-}
 </script>
 
 <template>
+    <app-header></app-header>
     <div class="dashboard">
-        <header class="topbar">
-            <div>
-                <h2>Admin de Transacciones</h2>
-                <span>Supervisor</span>
-            </div>
-
-            <div class="user-area">
-                <span>{{ user?.username }}</span>
-
-                <button class="btn btn-secondary" @click="signOut">
-                    Salir
-                </button>
-            </div>
-        </header>
 
         <main class="dashboard-content">
             <section class="welcome">
