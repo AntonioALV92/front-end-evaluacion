@@ -8,6 +8,7 @@ const router = useRouter()
 
 const username = ref('')
 const password = ref('')
+const visible = ref(false)
 const loading = ref(false)
 const error = ref('')
 const success = ref('')
@@ -55,48 +56,28 @@ async function login() {
 </script>
 
 <template>
-  <main class="login-page">
-    <section class="login-card">
-      <div class="login-header">
-        <h1>Admin de Transacciones</h1>
-        <p>Inicia sesión para continuar</p>
-      </div>
+  <v-card class="mx-auto my-auto" prepend-icon="$vuetify" subtitle="Inicia sesión para continuar" width="400">
+    <template v-slot:title>
+      <span class="font-weight-black">Admin de Transacciones</span>
+    </template>
 
-      <form @submit.prevent="login">
-        <div class="form-group">
-          <label>Usuario</label>
-          <input
-            v-model="username"
-            type="text"
-            placeholder="Ingresa tu usuario"
-          />
-        </div>
+    <v-form @submit.prevent="login">
+      <div class="pa-4">
+        <v-text-field label="Usuario" v-model="username" :rules="[v => !!v || '']"
+          placeholder="Ingresa tu usuario"></v-text-field>
+        <v-text-field label="Contraseña" v-model="password" :rules="[v => !!v || '']"
+          :append-inner-icon="visible ? 'mdi-eye-off' : 'mdi-eye'" :type="visible ? 'text' : 'password'"
+          placeholder="Ingresa tu contraseña" @click:append-inner="visible = !visible"></v-text-field>
 
-        <div class="form-group">
-          <label>Contraseña</label>
-          <input
-            v-model="password"
-            type="password"
-            placeholder="Ingresa tu contraseña"
-          />
-        </div>
+        <v-alert v-if="success" density="compact" closable :text="success" type="success" variant="tonal"
+          class="mb-2"></v-alert>
+        <v-alert v-if="error" density="compact" closable :text="error" type="error" variant="tonal"
+          class="mb-2"></v-alert>
 
-        <div v-if="error" class="alert alert-error">
-          {{ error }}
-        </div>
-
-        <div v-if="success" class="alert alert-success">
-          {{ success }}
-        </div>
-
-        <button
-          class="btn btn-primary btn-full"
-          type="submit"
-          :disabled="loading"
-        >
+        <v-btn type="submit" :disabled="loading" color="blue" size="large" variant="tonal" block>
           {{ loading ? 'Ingresando...' : 'Iniciar sesión' }}
-        </button>
-      </form>
-    </section>
-  </main>
+        </v-btn>
+      </div>
+    </v-form>
+  </v-card>
 </template>
