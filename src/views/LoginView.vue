@@ -39,7 +39,7 @@ async function login() {
       if (role === 'Supervisor') {
         // router.push('/supervisor')
       } else if (role === 'Operador') {
-        // router.push('/operator')
+        router.push('/operator')
       } else {
         error.value = 'Rol no reconocido'
       }
