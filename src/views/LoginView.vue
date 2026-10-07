@@ -37,7 +37,7 @@ async function login() {
 
     setTimeout(() => {
       if (role === 'Supervisor') {
-        // router.push('/supervisor')
+        router.push('/supervisor')
       } else if (role === 'Operador') {
         router.push('/operator')
       } else {

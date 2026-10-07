@@ -1,5 +1,6 @@
 import { getRole, isAuthenticated } from '@/services/auth.js'
 import OperatorView from '@/views/OperatorView.vue'
+import SupervisorView from '@/views/SupervisorView.vue'
 import { createRouter, createWebHistory } from 'vue-router'
 
 const router = createRouter({
@@ -22,6 +23,14 @@ const router = createRouter({
         role: 'Operador'
       }
     },
+    {
+      path: '/supervisor',
+      component: SupervisorView,
+      meta: {
+        requiresAuth: true,
+        role: 'Supervisor'
+      }
+    }
   ],
 })
 
