@@ -5,6 +5,10 @@ Evaluación técnica desarrollada con Vue 3.
 Esta aplicación simula un administrador de transacciones 
 con acceso basado en roles para Supervisores y Operadores.
 
+<img width="1546" height="997" alt="Captura de pantalla 2026-10-07 a la(s) 4 34 32 p m" src="https://github.com/user-attachments/assets/df78a5a1-e259-40b9-a30e-c430f0e28736" />
+<img width="1547" height="1085" alt="Captura de pantalla 2026-10-07 a la(s) 4 35 09 p m" src="https://github.com/user-attachments/assets/f0d56559-f083-485e-9917-db5ac298cabc" />
+<img width="1546" height="1088" alt="Captura de pantalla 2026-10-07 a la(s) 4 35 42 p m" src="https://github.com/user-attachments/assets/bfa6b072-3656-4309-9bd8-7015397c2fb3" />
+
 ---
 
 ## 🚀 Tecnologías
