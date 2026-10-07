@@ -3,6 +3,7 @@ import { ref } from 'vue'
 import api from '../services/api'
 import AppHeader from '../components/AppHeader.vue'
 import TransactionTable from '../components/TransactionTable.vue'
+import { encryptAES } from '@/services/encryption'
 
 const form = ref(null)
 const amount = ref('')
@@ -109,12 +110,22 @@ async function createSale() {
     loading.value = true
 
     try {
+        const [
+            encryptedCard,
+            encryptedExpiration,
+            encryptedCVV
+        ] = await Promise.all([
+            encryptAES(cardNumber.value.replace(/\s/g, '')),
+            encryptAES(cardExpiration.value),
+            encryptAES(cardCvv.value)
+        ])
+
         const response = await api.post('/transactions/sale', {
             amount: Number(amount.value),
             personName: personName.value,
-            cardNumber: cardNumber.value.replace(/\s/g, ''),
-            cardExpiration: cardExpiration.value,
-            cardCvv: cardCvv.value
+            cardNumber: encryptedCard,
+            cardExpiration: encryptedExpiration,
+            cardCvv: encryptedCVV
         })
 
         message.value = response.data.message
