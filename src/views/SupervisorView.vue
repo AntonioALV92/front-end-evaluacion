@@ -8,7 +8,6 @@ const router = useRouter()
 
 const user = getUser()
 
-const transactionId = ref('')
 const financialReference = ref('')
 const cardNumber = ref('')
 const action = ref('cancel')
@@ -26,7 +25,7 @@ async function updateTransaction() {
 
     try {
         const response = await api.patch(
-            `/transactions/${transactionId.value}`,
+            `/transactions/${financialReference.value}`,
             {
                 action: action.value,
                 financialReference: financialReference.value,
@@ -70,7 +69,7 @@ function signOut() {
     <div class="dashboard">
         <header class="topbar">
             <div>
-                <h2>Transaction Manager</h2>
+                <h2>Admin de Transacciones</h2>
                 <span>Supervisor</span>
             </div>
 
@@ -108,12 +107,6 @@ function signOut() {
                                 Devolución
                             </option>
                         </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label>ID de transacción</label>
-
-                        <input v-model="transactionId" type="text" required />
                     </div>
 
                     <div class="form-group">
