@@ -6,8 +6,12 @@ const router = createRouter({
   routes: [
     {
       path: '/',
-      name: 'home',
-      component: HomeView,
+      redirect: '/login'
+    },
+    {
+      path: '/login',
+      name: 'login',
+      component: () => import('../views/LoginView.vue')
     },
     {
       path: '/about',
@@ -19,5 +23,16 @@ const router = createRouter({
     },
   ],
 })
+
+router.beforeEach((to) => {
+  if (to.meta.requiresAuth && !isAuthenticated()) {
+    return '/login'
+  }
+
+  if (to.meta.role && getRole() !== to.meta.role) {
+    return '/login'
+  }
+})
+
 
 export default router
